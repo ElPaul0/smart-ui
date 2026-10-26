@@ -1,0 +1,17 @@
+[Unit]
+Description=smart-ui — MegaRAID / storcli web UI and alerts
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/smart-ui
+# Persistent config — edit this file, not the git tree
+EnvironmentFile=-/etc/smart-ui/smart-ui.env
+ExecStart=/opt/smart-ui/.venv/bin/python /opt/smart-ui/app.py
+Restart=always
+RestartSec=5
+User=root
+
+[Install]
+WantedBy=multi-user.target
